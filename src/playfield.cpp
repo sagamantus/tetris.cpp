@@ -2,31 +2,14 @@
 #include <ncurses.h>
 #include <vector>
 #include "../lib/constants.h"
-
-class Playfield
-{
-public:
-    int rows;
-    int columns;
-    // 2D vector representing the cells on the playfield
-    std::vector<std::vector<std::string>> game_grid;
-
-    // Constructors
-    Playfield();                      // Default
-    Playfield(int rows, int columns); // With rows and columns
-
-    // Methods
-    bool row_full(int row);  // Check if a row is completely filled
-    void clear_row(int row); // Clear the row
-    void clear_filled();     // Clear all completely filled rows
-};
+#include "../lib/playfield.h"
 
 // Default constructor
 Playfield::Playfield()
 {
     // Initialize the rows, columns and game grid vector
-    this->rows = DEF_ROW;
-    this->columns = DEF_COL;
+    this->rows = WINDOW_HEIGHT;
+    this->columns = WINDOW_WIDTH;
     this->game_grid.resize(this->rows);
     for (int row = 0; row < this->rows; ++row)
         this->game_grid[row].resize(this->columns, "");
