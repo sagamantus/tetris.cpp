@@ -4,12 +4,15 @@
 #include <iostream>
 #include <ncurses.h>
 #include <vector>
+#include "../lib/tetromino.h"
 
 class Playfield
 {
 public:
     int rows;
     int columns;
+    int score;               // Total score
+    
     // 2D vector representing the cells on the playfield
     std::vector<std::vector<std::string>> game_grid;
 
@@ -21,6 +24,7 @@ public:
     bool row_full(int row);  // Check if a row is completely filled
     void clear_row(int row); // Clear the row
     void clear_filled();     // Clear all completely filled rows
+    Tetromino generate_tetromino();
 };
 
 #endif
