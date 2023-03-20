@@ -21,7 +21,7 @@ bool Tetromino::is_overlapping(Playfield pf, std::vector<std::vector<std::string
         {
             if (new_orientation[i][j] != " " && pf.game_grid[this->position.first + i][this->position.second + j] != " ")
             {
-                overlapping = false;
+                overlapping = true;
                 return overlapping;
             }
         }
@@ -37,7 +37,7 @@ bool Tetromino::is_overlapping(Playfield pf, std::pair<int, int> new_position)
         {
             if (this->tetromino_grid[i][j] != " " && pf.game_grid[new_position.first + i][new_position.second + j] != " ")
             {
-                overlapping = false;
+                overlapping = true;
                 return overlapping;
             }
         }
