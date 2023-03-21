@@ -19,6 +19,8 @@ Playfield::Playfield()
     for (int row = 1; row <= this->rows; ++row)
     {
         this->game_grid[row].resize(this->columns + 2, " ");
+        this->game_grid[row][0] = "x";
+        this->game_grid[row][this->columns+1] = "x";
     }
     this->game_grid[rows + 1].resize(this->columns + 2, "x");
 }
@@ -35,6 +37,8 @@ Playfield::Playfield(int rows, int columns)
     for (int row = 1; row <= this->rows; ++row)
     {
         this->game_grid[row].resize(this->columns + 2, " ");
+        this->game_grid[row][0] = "x";
+        this->game_grid[row][this->columns+1] = "x";
     }
     this->game_grid[rows + 1].resize(this->columns + 2, "x");
 }
@@ -61,14 +65,14 @@ void Playfield::clear_row(int row)
     std::vector<std::string> new_row(this->columns + 2, " ");
     new_row[0] = "x";
     new_row[columns + 1] = "x";
-    this->game_grid.insert(this->game_grid.begin(), new_row);
+    this->game_grid.insert(this->game_grid.begin()+1, new_row);
 }
 
 // Clear all completely filled rows by calling clear_row for each filled row
 void Playfield::clear_filled()
 {
     int cleared = 0;
-    for (int row = 0; row < this->rows; ++row)
+    for (int row = 1; row <= this->rows; ++row)
     {
         if (this->row_full(row))
         {
@@ -88,20 +92,8 @@ void Playfield::clear_filled()
     {
         this->score += 30;
     }
-    else
+    else if (cleared == 1)
     {
         this->score += 10;
     }
-}
-
-Tetromino Playfield::generate_tetromino()
-{
-    srand(time(NULL));
-    Tetromino tetrominos[] = {ITetromino(), JTetromino(), LTetromino(), OTetromino(), STetromino(), TTetromino(), ZTetromino()};
-    Tetromino selected = tetrominos[rand() % 7];
-    for (int i = 0; i < rand() % 4; ++i)
-    {
-        selected.rotate(*this);
-    }
-    return selected;
 }

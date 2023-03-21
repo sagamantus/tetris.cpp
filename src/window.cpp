@@ -8,39 +8,40 @@
 #include "../lib/tetromino.h"
 #include "../lib/playfield.h"
 
-
-void GameWindow::display() {
-
-	initscr();
-	noecho();
-	Tetromino ttmno;
-
-	std::vector<std::vector<std::string>> ttmno_grid = ttmno.tetromino_grid;
-	std::pair<int, int> coord_pair = ttmno.position;
-
-	int rows = ttmno_grid.size();
-	int cols = tt.mno_grid[0].size();
-
-	WINDOW *gwin = newwin(rows, cols, coord_pair.second, coord_pair.first);
-
-
-	for( int i = 0; i < rows; i++ ) {
-		for( int j = 0; j < cols; j++) {
-			if( ttmno_grid[i][j] == "0" ) {
-				mvwaddch(win, i, j, ttmno_grid[i][j]);
-			}
+void GameWindow::display(Playfield pf, Tetromino ttmno)
+{
+	std::vector<std::vector<std::string>> game_grid = pf.game_grid;
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (ttmno.tetromino_grid[i][j] == "0")
+				game_grid[ttmno.position.first + i][ttmno.position.second + j] = ttmno.tetromino_grid[i][j];
 		}
 	}
 
-	wrefresh(win);
-
+	printw("> TETRIS.cpp\n");
+	printw("w - rotate; a - left; d - right; s - down; <space> - drop\n\n");
+	for (auto x : game_grid)
+	{
+		for (auto y : x)
+		{
+			const char * block = y.c_str();
+			printw("%s", block);
+		}
+		printw("\n");
+	}
+	printw("\n");
+	printw("Score: %d\n", pf.score);
 }
 
-void GameWindow::refresh() {
+void GameWindow::refresh(Playfield pf, Tetromino ttmno)
+{
 	clear();
-	this->display();
+	this->display(pf, ttmno);
 }
 
-void GameWindow::end() {
+void GameWindow::end()
+{
 	endwin();
 }

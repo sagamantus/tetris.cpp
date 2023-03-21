@@ -1,7 +1,12 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 // Contains all the constants used in this project
 
-extern const int DROP_RATE = 1;
-extern const int START_X = 10;
-extern const int START_Y = 10;
-extern const int WINDOW_HEIGHT = 30;
-extern const int WINDOW_WIDTH = 10;
+extern int DROP_RATE;
+extern int START_X;
+extern int START_Y;
+extern int WINDOW_HEIGHT;
+extern int WINDOW_WIDTH;
+
+#endif
