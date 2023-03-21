@@ -7,6 +7,8 @@ class GameWindow {
 	public:
 
 		void display();
+		void refresh();
+		void end();
 };
 
 #endif
