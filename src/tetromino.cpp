@@ -129,7 +129,7 @@ void Tetromino::rotate(Playfield &pf)
     }
     else
     {
-        if (!this->is_overlapping(pf, matrix))
+        if (!this->is_overlapping(pf, result))
         {
             this->tetromino_grid = result;
         }
